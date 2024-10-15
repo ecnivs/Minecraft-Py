@@ -8,7 +8,7 @@
 
 ## Prerequisites
 * Python 3.x
-    * Ursina
+    * Ursina `pip install ursina`
 
 ## Installation
 1. Clone the repository:
