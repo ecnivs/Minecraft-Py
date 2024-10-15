@@ -1,7 +1,8 @@
 from ursina import *
+from settings import sky_texture, arm_texture
 
 class Sky(Entity):
-	def __init__(self, sky_texture):
+	def __init__(self):
 		super().__init__(
 			parent = scene,
 			model = 'sphere',
@@ -11,7 +12,7 @@ class Sky(Entity):
 
 class Hand(Entity):
 	# hand
-	def __init__(self, arm_texture):
+	def __init__(self):
 		super().__init__(
 			parent = camera.ui,
 			model = 'assets/arm',

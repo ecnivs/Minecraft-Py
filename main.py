@@ -1,23 +1,22 @@
 from ursina import *
 from entities import *
+from settings import *
 
 class Core:
     def __init__(self):
         self.app = Ursina()
         self.load_assets()
-        self.sky = Sky(self.sky_texture)
-        self.hand = Hand(self.arm_texture)
+        self.sky = Sky()
+        self.hand = Hand()
 
     def load_assets(self):
-        self.grass_texture = load_texture('assets/grass_block.png')
-        self.stone_texture = load_texture('assets/stone_block.png')
-        self.brick_texture = load_texture('assets/brick_block.png')
-        self.dirt_texture  = load_texture('assets/dirt_block.png')
-        self.sky_texture   = load_texture('assets/skybox.png')
-        self.arm_texture   = load_texture('assets/arm_texture.png')
-        self.bedrock_texture = load_texture("assets/bedrock.png")
-        self.punch_sound   = Audio('audio/punch_sound',loop = False, autoplay = False)
-
+        self.grass_texture = load_texture(grass_texture)
+        self.stone_texture = load_texture(stone_texture)
+        self.brick_texture = load_texture(brick_texture)
+        self.dirt_texture  = load_texture(dirt_texture)
+        self.sky_texture   = load_texture(sky_texture)
+        self.arm_texture   = load_texture(arm_texture)
+        self.punch_sound   = Audio(punch_sound, loop = False, autoplay = False)
 
     def run(self):
         self.app.run()
