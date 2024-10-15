@@ -22,7 +22,7 @@ def update():
 	else:
 		hand.passive()
 
-    # invisible wall
+    # dont allow player to leave area
 	if player.x < 0: player.x = 0
 	if player.x > render_distance-1: player.x = render_distance-1
 	if player.z < 0: player.z = 0
@@ -56,7 +56,6 @@ def update():
 		tab = 1
 
 class Bedrock(Button):
-	# making and indestructible block
 	def __init__(self, position = (0,0,0), texture = grass_texture):
 		super().__init__(
 			parent = scene,
@@ -67,7 +66,6 @@ class Bedrock(Button):
 			color = color.color(0,0,random.uniform(0.9,1)),
 			scale = 0.5)
 
-    # placing blocks on the bedrock
 	def input(self,key):
 		if self.hovered:
 			if key == 'right mouse down':
@@ -78,7 +76,6 @@ class Bedrock(Button):
 				if block_pick == 4: voxel = Voxel(position = self.position + mouse.normal, texture = brick_texture)
 
 class Voxel(Button):
-	# blocks
 	def __init__(self, position = (0,0,0), texture = grass_texture):
 		super().__init__(
 			parent = scene,
@@ -99,7 +96,6 @@ class Voxel(Button):
 				if block_pick == 4: voxel = Voxel(position = self.position + mouse.normal, texture = brick_texture)
 
 			if key == 'left mouse down':
-				# destroy blocks
 				punch_sound.play()
 				destroy(self)
 
