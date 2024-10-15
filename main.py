@@ -1,33 +1,17 @@
-# pip install ursina
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
 from settings import *
 
 app = Ursina()
 
-# game variables
-block_pick = 1
-render_distance = 20
-mouse.locked = True
-mouse.visible = False
-tab = 0
-
-# load images
+# load assets
 grass_texture = load_texture(grass_texture)
 stone_texture = load_texture(stone_texture)
 brick_texture = load_texture(brick_texture)
 dirt_texture = load_texture(dirt_texture)
 sky_texture = load_texture(sky_texture)
 arm_texture = load_texture(arm_texture)
-
-# load sounds
 punch_sound = Audio(punch_sound, loop = False, autoplay = False)
-
-# display fps
-window.fps_counter.enabled = True
-
-# exit button
-window.exit_button.visible = True
 
 def update():
 	global block_pick
@@ -50,7 +34,7 @@ def update():
 	if held_keys['3']: block_pick = 3
 	if held_keys['4']: block_pick = 4
 
-	# respawn location incase of any bug
+	# respawn location
 	if player.y < -10:
 		voxel = Voxel(position = (x,-1,z))
 		player.y = +3
@@ -87,7 +71,6 @@ class Bedrock(Button):
 	def input(self,key):
 		if self.hovered:
 			if key == 'right mouse down':
-				# place blocks
 				punch_sound.play()
 				if block_pick == 1: voxel = Voxel(position = self.position + mouse.normal, texture = grass_texture)
 				if block_pick == 2: voxel = Voxel(position = self.position + mouse.normal, texture = dirt_texture)
@@ -109,7 +92,6 @@ class Voxel(Button):
 	def input(self,key):
 		if self.hovered:
 			if key == 'right mouse down':
-				# place blocks
 				punch_sound.play()
 				if block_pick == 1: voxel = Voxel(position = self.position + mouse.normal, texture = grass_texture)
 				if block_pick == 2: voxel = Voxel(position = self.position + mouse.normal, texture = dirt_texture)
@@ -150,14 +132,8 @@ class Hand(Entity):
 # render ground
 for z in range(render_distance):
 	for x in range(render_distance):
-
-		# ground
 		voxel = Voxel(position = (x,0,z))
-
-		# second layer
 		voxel = Voxel(position = (x,-1,z), texture=dirt_texture)
-
-		# placing bedrock below 
 		bedrock = Bedrock(position = (x,-2,z))
 
 if __name__ == "__main__":
