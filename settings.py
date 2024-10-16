@@ -10,6 +10,6 @@ arm_texture   = 'assets/arm_texture.png'
 punch_sound = 'audio/punch_sound'
 
 # game variables
-render_distance = 10
+render_distance = 8
 mouse.locked = True
 mouse.visible = False
