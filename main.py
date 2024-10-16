@@ -32,10 +32,14 @@ class Voxel(Button):
         if self.hovered:
             if key == 'right mouse down':
                 punch_sound.play()
-                if current_block == 1: voxel = Voxel(position=self.position + mouse.normal, texture=grass_texture)
-                if current_block == 2: voxel = Voxel(position=self.position + mouse.normal, texture=dirt_texture)
-                if current_block == 3: voxel = Voxel(position=self.position + mouse.normal, texture=stone_texture)
-                if current_block == 4: voxel = Voxel(position=self.position + mouse.normal, texture=brick_texture)
+                if current_block == 1:
+                    voxel = Voxel(position=self.position + mouse.normal, texture=grass_texture)
+                if current_block == 2:
+                    voxel = Voxel(position=self.position + mouse.normal, texture=dirt_texture)
+                if current_block == 3:
+                    voxel = Voxel(position=self.position + mouse.normal, texture=stone_texture)
+                if current_block == 4:
+                    voxel = Voxel(position=self.position + mouse.normal, texture=brick_texture)
 
             if key == 'left mouse down':
                 punch_sound.play()
@@ -56,10 +60,14 @@ class Bedrock(Button):
         if self.hovered:
             if key == 'right mouse down':
                 punch_sound.play()
-                if current_block == 1: voxel = Voxel(position=self.position + mouse.normal, texture=grass_texture)
-                if current_block == 2: voxel = Voxel(position=self.position + mouse.normal, texture=dirt_texture)
-                if current_block == 3: voxel = Voxel(position=self.position + mouse.normal, texture=stone_texture)
-                if current_block == 4: voxel = Voxel(position=self.position + mouse.normal, texture=brick_texture)
+                if current_block == 1:
+                    voxel = Voxel(position=self.position + mouse.normal, texture=grass_texture)
+                if current_block == 2:
+                    voxel = Voxel(position=self.position + mouse.normal, texture=dirt_texture)
+                if current_block == 3:
+                    voxel = Voxel(position=self.position + mouse.normal, texture=stone_texture)
+                if current_block == 4:
+                    voxel = Voxel(position=self.position + mouse.normal, texture=brick_texture)
 
 class Sky(Entity):
     def __init__(self):
