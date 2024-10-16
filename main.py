@@ -15,7 +15,7 @@ punch_sound = Audio(punch_sound, loop=False, autoplay=False)
 
 # game variables
 current_block = 1
-tab = True
+tab = False
 
 class Voxel(Button):
     def __init__(self, position=(0,0,0), texture=grass_texture):
@@ -138,20 +138,12 @@ def update():
         player.y = +3
         player.x = 0
 
-    # Lock and unlock mouse
-    if held_keys['tab'] == 1 and tab == True:
-        tab = False
-        try:
-            if mouse.locked:
-                mouse.locked = False
-                mouse.visible = True
-            else:
-                mouse.locked = True
-                mouse.visible = False
-        except:
-            pass
-    if held_keys['tab'] == 0 and tab == False:
+    if held_keys['tab'] and not tab:
         tab = True
+        mouse.locked = not mouse.locked
+        mouse.visible = not mouse.visible
+    elif not held_keys['tab']:
+        tab = False
 
 if __name__ == "__main__":
     player = FirstPersonController()
