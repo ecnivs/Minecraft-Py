@@ -134,7 +134,7 @@ def update():
 
     # respawn location
     if player.y < -10:
-        voxel = Voxel(position=(0, -1, 0))
+        voxel = Voxel(position=(1, -1, 1))
         player.y = +3
         player.x = 0
 
