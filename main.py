@@ -18,7 +18,7 @@ current_block = 1
 tab = False
 
 class Voxel(Button):
-    def __init__(self, position=(0,0,0), texture=grass_texture):
+    def __init__(self, position=(0, 0, 0), texture=grass_texture):
         super().__init__(
             parent=scene,
             position=position,
@@ -32,14 +32,17 @@ class Voxel(Button):
         if self.hovered:
             if key == 'right mouse down':
                 punch_sound.play()
-                if current_block == 1:
-                    voxel = Voxel(position=self.position + mouse.normal, texture=grass_texture)
-                if current_block == 2:
-                    voxel = Voxel(position=self.position + mouse.normal, texture=dirt_texture)
-                if current_block == 3:
-                    voxel = Voxel(position=self.position + mouse.normal, texture=stone_texture)
-                if current_block == 4:
-                    voxel = Voxel(position=self.position + mouse.normal, texture=brick_texture)
+                new_position = self.position + mouse.normal
+
+                if (new_position - player.position).length() > 1:
+                    if current_block == 1:
+                        Voxel(position=new_position, texture=grass_texture)
+                    elif current_block == 2:
+                        Voxel(position=new_position, texture=dirt_texture)
+                    elif current_block == 3:
+                        Voxel(position=new_position, texture=stone_texture)
+                    elif current_block == 4:
+                        Voxel(position=new_position, texture=brick_texture)
 
             if key == 'left mouse down':
                 punch_sound.play()
@@ -52,22 +55,25 @@ class Bedrock(Button):
             position=position,
             model='assets/block',
             origin_y=0.5,
-            texture=dirt_texture,
-            color=color.color(0, 0, random.uniform(0.9, 1)),
+            texture=stone_texture,
+            color=color.color(0, 0, 0.4),
             scale=0.5)
 
     def input(self, key):
         if self.hovered:
             if key == 'right mouse down':
                 punch_sound.play()
-                if current_block == 1:
-                    voxel = Voxel(position=self.position + mouse.normal, texture=grass_texture)
-                if current_block == 2:
-                    voxel = Voxel(position=self.position + mouse.normal, texture=dirt_texture)
-                if current_block == 3:
-                    voxel = Voxel(position=self.position + mouse.normal, texture=stone_texture)
-                if current_block == 4:
-                    voxel = Voxel(position=self.position + mouse.normal, texture=brick_texture)
+                new_position = self.position + mouse.normal
+
+                if (new_position - player.position).length() > 1:
+                    if current_block == 1:
+                        Voxel(position=new_position, texture=grass_texture)
+                    elif current_block == 2:
+                        Voxel(position=new_position, texture=dirt_texture)
+                    elif current_block == 3:
+                        Voxel(position=new_position, texture=stone_texture)
+                    elif current_block == 4:
+                        Voxel(position=new_position, texture=brick_texture)
 
 class Sky(Entity):
     def __init__(self):
@@ -100,8 +106,6 @@ class Chunk(Entity):
         super().__init__(position=position)
         self.size = size
         self.voxels = []
-
-        # Create voxels for this chunk
         self.create_voxels()
 
     def create_voxels(self):
@@ -109,9 +113,9 @@ class Chunk(Entity):
             for x in range(self.size):
                 voxel = Voxel(position=(self.x + x, 0, self.z + z), texture=grass_texture)
                 self.voxels.append(voxel)
-                # Adding a voxel on the ground
                 Voxel(position=(self.x + x, -1, self.z + z), texture=dirt_texture)
-                Bedrock(position=(self.x + x, -2, self.z + z))
+                Voxel(position=(self.x + x, -2, self.z + z), texture=dirt_texture)
+                Bedrock(position=(self.x + x, -3, self.z + z))
 
 # main game loop
 def update():
@@ -150,9 +154,8 @@ if __name__ == "__main__":
     sky = Sky()
     hand = Hand()
 
-    # Create and load chunks around the player
     chunks = []
-    for z in range(-1, 2):  # Load 3x3 chunks around the player
+    for z in range(-1, 2):
         for x in range(-1, 2):
             chunk_position = (x * render_distance, 0, z * render_distance)
             chunk = Chunk(position=chunk_position, size=render_distance)
