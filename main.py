@@ -52,6 +52,15 @@ class Bedrock(Button):
             color=color.color(0, 0, random.uniform(0.9, 1)),
             scale=0.5)
 
+    def input(self, key):
+        if self.hovered:
+            if key == 'right mouse down':
+                punch_sound.play()
+                if current_block == 1: voxel = Voxel(position=self.position + mouse.normal, texture=grass_texture)
+                if current_block == 2: voxel = Voxel(position=self.position + mouse.normal, texture=dirt_texture)
+                if current_block == 3: voxel = Voxel(position=self.position + mouse.normal, texture=stone_texture)
+                if current_block == 4: voxel = Voxel(position=self.position + mouse.normal, texture=brick_texture)
+
 class Sky(Entity):
     def __init__(self):
         super().__init__(
@@ -90,7 +99,7 @@ class Chunk(Entity):
     def create_voxels(self):
         for z in range(self.size):
             for x in range(self.size):
-                voxel = Voxel(position=(self.x + x, 0, self.z + z), texture=dirt_texture)
+                voxel = Voxel(position=(self.x + x, 0, self.z + z), texture=grass_texture)
                 self.voxels.append(voxel)
                 # Adding a voxel on the ground
                 Voxel(position=(self.x + x, -1, self.z + z), texture=dirt_texture)
