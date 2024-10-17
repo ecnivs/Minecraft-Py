@@ -30,8 +30,8 @@ python main.py
 * `S`: Move back
 * `A`: Move left
 * `D`: Move right
-* `Left Click`: Remove block
-* `Right Click`: Place block
+* `Left Mouse Button`: Remove block
+* `Right Mouse Button`: Place block
 * `1-4`: Change block
 
 ### I'd appreciate any feedback or code reviews you might have!
