@@ -126,7 +126,8 @@ def update():
         hand.active()
     else:
         hand.passive()
-
+    
+    # change block
     if held_keys['1']:
         current_block = 1
     elif held_keys['2']:
